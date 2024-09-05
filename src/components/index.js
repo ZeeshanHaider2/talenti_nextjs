@@ -1,11 +1,15 @@
+"use client";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import * as actions from "@/actions";
 
 const AddTalent = () => {
+  const [first, setFirst] = useState(false);
   return (
     <div className="w-full mt-8">
-      <form action="" className="flex flex-col gap-2">
+      <form action={actions.firstServerAction} className="flex flex-col gap-2">
         <Label htmlFor="terms">Name</Label>
         <Input type="text" placeholder="name" />
         <Label htmlFor="email">Email</Label>
