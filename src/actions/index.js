@@ -1,5 +1,6 @@
 "use server";
 import { prisma } from "@/utils/prisma";
+import { revalidatePath } from "next/cache";
 export async function createTalent(formData) {
   const name = formData.get("name");
   const email = formData.get("email");
@@ -14,4 +15,5 @@ export async function createTalent(formData) {
       skills: skills,
     },
   });
+  revalidatePath("/");
 }
