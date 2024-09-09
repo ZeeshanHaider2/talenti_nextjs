@@ -17,3 +17,14 @@ export async function createTalent(formData) {
   });
   revalidatePath("/");
 }
+
+export async function deleteTalent(formData) {
+  const inputID = formData.get("inputID");
+
+  await prisma.talent.delete({
+    where: {
+      id: inputID,
+    },
+  });
+  revalidatePath("/");
+}
