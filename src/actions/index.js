@@ -1,6 +1,7 @@
 "use server";
 import { prisma } from "@/utils/prisma";
 import { revalidatePath } from "next/cache";
+
 export async function createTalent(formData) {
   const name = formData.get("name");
   const email = formData.get("email");
@@ -24,6 +25,26 @@ export async function deleteTalent(formData) {
   await prisma.talent.delete({
     where: {
       id: inputID,
+    },
+  });
+  revalidatePath("/");
+}
+
+export async function editTalent(formData) {
+  const newName = formData.get("name");
+  const newEmail = formData.get("email");
+  const newTitle = formData.get("title");
+  const newSkills = formData.get("skills");
+  const inputID = formData.get("inputID");
+  await prisma.talent.update({
+    where: {
+      id: inputID,
+    },
+    data: {
+      name: newName,
+      email: newEmail,
+      title: newTitle,
+      skills: newSkills,
     },
   });
   revalidatePath("/");
